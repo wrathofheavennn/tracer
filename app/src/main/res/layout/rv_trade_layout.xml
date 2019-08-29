@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="BTC"
+        android:text="@string/sample_coinName"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,7 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Buy Price:"
+        android:text="@string/buy_price"
+        android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coinName" />
 
@@ -31,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="9700"
+        android:text="@string/sample_buy"
         app:layout_constraintStart_toEndOf="@+id/buyLabel"
         app:layout_constraintTop_toBottomOf="@+id/coinName" />
 
@@ -42,7 +44,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Sell Price:"
+        android:text="@string/sell_price"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buyLabel" />
@@ -53,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="10500"
+        android:text="@string/sample_sell"
         app:layout_constraintStart_toEndOf="@+id/sellLabel"
         app:layout_constraintTop_toBottomOf="@+id/buyLabel" />
 
@@ -63,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="5000"
+        android:text="@string/sample_amount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coinName" />
 
@@ -73,7 +76,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Bought Amount:"
+        android:text="@string/bought_amount"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toStartOf="@+id/buyAmount"
         app:layout_constraintTop_toBottomOf="@+id/coinName" />
 </androidx.constraintlayout.widget.ConstraintLayout>
