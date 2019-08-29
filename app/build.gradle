@@ -47,4 +47,7 @@ dependencies {
 
     //submit Button
     implementation 'me.spark:submitbutton:1.0.1'
+
+    //recycler view
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
