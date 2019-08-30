@@ -28,6 +28,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.view.Menu;
 
+import timber.log.Timber;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-
+        Timber.plant();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navController = Navigation.findNavController(this, R.id.main_content);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

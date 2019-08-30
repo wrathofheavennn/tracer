@@ -1,9 +1,22 @@
 package com.example.tracer.model;
 
-import java.util.ArrayList;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "trade")
 public class Trade {
+
+    @PrimaryKey(autoGenerate = false)
+    private long id;
+    @ColumnInfo(name = "name")
     private String cryptoName;
+    @ColumnInfo(name = "buyPrice")
+    private long buyPrice;
+    @ColumnInfo(name = "sellPrice")
+    private long sellPrice;
+    @ColumnInfo(name = "amountBought")
+    private long amountBought;
 
     public long getId() {
         return id;
@@ -12,8 +25,6 @@ public class Trade {
     public void setId(long id) {
         this.id = id;
     }
-
-    private long id;
 
     public String getCryptoName() {
         return cryptoName;
@@ -46,10 +57,6 @@ public class Trade {
     public void setAmountBought(long amountBought) {
         this.amountBought = amountBought;
     }
-
-    private long buyPrice;
-    private long sellPrice;
-    private long amountBought;
 
     public Trade(String cryptoName, long buyPrice, long sellPrice, long amountBought) {
         this.id = System.currentTimeMillis();
