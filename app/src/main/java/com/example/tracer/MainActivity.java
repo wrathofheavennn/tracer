@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
@@ -30,7 +31,7 @@ import android.view.Menu;
 
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private NavController navController;
@@ -40,50 +41,44 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setupNavigation();
+        Timber.plant();
+    }
+
+    private void setupNavigation() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        /*FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-        Timber.plant();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navController = Navigation.findNavController(this, R.id.main_content);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
+
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //navigationView.setNavigationItemSelectedListener(this);
+
+        navController = Navigation.findNavController(this, R.id.main_content);
 
         // Show and Manage the Drawer and Back Icon
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);
-
         // Handle Navigation item clicks
         // This works with no further action on your part if the menu and destination id’s match.
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        //Add this line of code here to open the default selected menu on app start time.
-       // ShowFragment(R.id.nav_camera);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         // Allows NavigationUI to support proper up navigation or the drawer layout
         // drawer menu, depending on the situation.
-        return NavigationUI.navigateUp(navController, drawerLayout);
+        return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.main_content)
+                , drawerLayout);
 
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -109,6 +104,27 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        menuItem.setChecked(true);
+
+        drawerLayout.closeDrawers();
+
+        int id = menuItem.getItemId();
+
+        switch (id) {
+
+            case R.id.fragment_1:
+                navController.navigate(R.id.fragment_1);
+                break;
+
+            case R.id.fragment_2:
+                navController.navigate(R.id.fragment_2);
+                break;
+        }
+        return true;
     }
 
 

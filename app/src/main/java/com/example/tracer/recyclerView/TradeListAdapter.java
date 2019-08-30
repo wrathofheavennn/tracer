@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -82,4 +81,17 @@ public class TradeListAdapter extends
         return tradeList.size();
     }
 
+    public List<Trade> getList() {
+        return tradeList;
+    }
+
+    public void removeItem(int position) {
+        tradeList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void restoreItem(Trade item, int position) {
+        tradeList.add(position, item);
+        notifyItemInserted(position);
+    }
 }

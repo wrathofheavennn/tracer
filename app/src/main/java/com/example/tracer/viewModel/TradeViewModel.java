@@ -35,4 +35,14 @@ public class TradeViewModel extends AndroidViewModel {
         });
 
     }
+
+    public void deleteTrade(Trade t) {
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                tradeDatabase.tradeDao().deleteTrade(t);
+            }
+        });
+
+    }
 }
