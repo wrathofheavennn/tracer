@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.navigation.NavHostController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.tracer.R;
+import com.example.tracer.utils.Keyboard;
 import com.example.tracer.viewModel.TradeViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.tracer.utils.Keyboard.*;
 import com.google.android.material.textfield.TextInputEditText;
 import com.spark.submitbutton.SubmitButton;
 
@@ -40,13 +40,13 @@ public class TraceCreateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         TradeViewModel tradeViewModel = ViewModelProviders.of(this)
                 .get(TradeViewModel.class);
-
         View view = inflater.inflate(R.layout.fragment_create_trace, container, false);
         ButterKnife.bind(this, view);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isValid()) {
+                    Keyboard.closeKeyboard(view, getContext());
                     tradeViewModel.addTrade("BTC", Long.parseLong(priceInput.getText()
                             .toString()), 0, Long.parseLong(amountInput.getText().toString()));
                     NavHostFragment.findNavController(Objects.requireNonNull(
@@ -55,10 +55,6 @@ public class TraceCreateFragment extends Fragment {
             }
         });
         return view;
-    }
-
-    private void initButton(TradeViewModel tv) {
-
     }
 
     private boolean isValid() {
