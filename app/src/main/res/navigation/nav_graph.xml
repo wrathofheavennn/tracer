@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/fragment_1"
-        android:name="com.example.tracer.fragment.Fragment_1"
-        android:label="fragment_layout_1"
+        android:name="com.example.tracer.fragment.ActiveTradeFragment"
+        android:label="Active Traces"
         tools:layout="@layout/fragment_layout_1" >
         <action
             android:id="@+id/action_fragment_1_to_traceCreateFragment"

@@ -25,7 +25,7 @@ public class TradeViewModel extends AndroidViewModel {
         return tradeListLiveData;
     }
 
-    public void addTrade(String name, long buy, long sell, long amount) {
+    public void addTrade(String name, float buy, float sell, float amount) {
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
@@ -45,4 +45,15 @@ public class TradeViewModel extends AndroidViewModel {
         });
 
     }
+
+    public void updateTrade(Trade t) {
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                tradeDatabase.tradeDao().updateTrade(t);
+            }
+        });
+
+    }
+
 }

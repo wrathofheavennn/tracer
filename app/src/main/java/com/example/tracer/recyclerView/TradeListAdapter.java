@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tracer.R;
@@ -31,10 +32,12 @@ public class TradeListAdapter extends
         TextView buyAmount;
         @BindView(R.id.buyPrice)
         TextView buyPrice;
-        @BindView(R.id.sellPrice)
-        TextView sellPrice;
-
-
+        @BindView(R.id.askPrice)
+        TextView askPrice;
+        @BindView(R.id.pnlPercent)
+        TextView pnlPercent;
+        @BindView(R.id.pnlActual)
+        TextView pnlActual;
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
         public ViewHolder(View itemView) {
@@ -70,9 +73,20 @@ public class TradeListAdapter extends
 
         // Set item views based on your views and data model
         viewHolder.coinName.setText(trade.getCryptoName());
-        viewHolder.buyAmount.setText(Long.toString(trade.getAmountBought()));
-        viewHolder.buyPrice.setText(Long.toString(trade.getBuyPrice()));
-        viewHolder.sellPrice.setText(Long.toString(trade.getSellPrice()));
+        viewHolder.buyAmount.setText(Float.toString(trade.getAmountBought()));
+        viewHolder.buyPrice.setText(Float.toString(trade.getBuyPrice()));
+        viewHolder.askPrice.setText(Float.toString(trade.getAskPrice()));
+        viewHolder.pnlPercent.setText(Float.toString(trade.getProfitLossPercent()));
+        viewHolder.pnlActual.setText(Float.toString(trade.getProfitLossActual()));
+        float x = trade.getProfitLossPercent();
+        Context context = viewHolder.pnlActual.getContext();
+        if (x>0) {
+            viewHolder.pnlPercent.setTextColor(ContextCompat.getColor(context,R.color.colorGreen));
+            viewHolder.pnlActual.setTextColor(ContextCompat.getColor(context,R.color.colorGreen));
+        } else if (x<0) {
+            viewHolder.pnlPercent.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
+            viewHolder.pnlActual.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
+        }
     }
 
     // Returns the total count of items in the list

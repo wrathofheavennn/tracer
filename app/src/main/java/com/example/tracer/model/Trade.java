@@ -12,11 +12,42 @@ public class Trade {
     @ColumnInfo(name = "name")
     private String cryptoName;
     @ColumnInfo(name = "buyPrice")
-    private long buyPrice;
+    private float buyPrice;
     @ColumnInfo(name = "sellPrice")
-    private long sellPrice;
+    private float sellPrice;
     @ColumnInfo(name = "amountBought")
-    private long amountBought;
+    private float amountBought;
+    @ColumnInfo(name = "askPrice")
+    private float askPrice;
+    @ColumnInfo(name = "profitLossActual")
+    private float profitLossActual;
+    @ColumnInfo(name = "profitLossPercent")
+    private float profitLossPercent;
+
+    public float getProfitLossActual() {
+        return profitLossActual;
+    }
+
+    public void setProfitLossActual(float profitLoss) {
+        this.profitLossActual = profitLoss;
+    }
+
+    public float getProfitLossPercent() {
+        return profitLossPercent;
+    }
+
+    public void setProfitLossPercent(float profitLossPercent) {
+        this.profitLossPercent = profitLossPercent;
+    }
+
+    public float getAskPrice() {
+        return askPrice;
+    }
+
+    public void setAskPrice(float askPrice) {
+        this.askPrice = askPrice;
+    }
+
 
     public long getId() {
         return id;
@@ -34,31 +65,31 @@ public class Trade {
         this.cryptoName = cryptoName;
     }
 
-    public long getBuyPrice() {
+    public float getBuyPrice() {
         return buyPrice;
     }
 
-    public void setBuyPrice(long buyPrice) {
+    public void setBuyPrice(float buyPrice) {
         this.buyPrice = buyPrice;
     }
 
-    public long getSellPrice() {
+    public float getSellPrice() {
         return sellPrice;
     }
 
-    public void setSellPrice(long sellPrice) {
+    public void setSellPrice(float sellPrice) {
         this.sellPrice = sellPrice;
     }
 
-    public long getAmountBought() {
+    public float getAmountBought() {
         return amountBought;
     }
 
-    public void setAmountBought(long amountBought) {
+    public void setAmountBought(float amountBought) {
         this.amountBought = amountBought;
     }
 
-    public Trade(String cryptoName, long buyPrice, long sellPrice, long amountBought) {
+    public Trade(String cryptoName, float buyPrice, float sellPrice, float amountBought) {
         this.id = System.currentTimeMillis();
         this.cryptoName = cryptoName;
         this.buyPrice = buyPrice;

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -38,27 +39,24 @@
         app:layout_constraintTop_toBottomOf="@+id/coinName" />
 
     <TextView
-        android:id="@+id/sellLabel"
+        android:id="@+id/currentLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/sell_price"
+        android:text="@string/ask_price"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buyLabel" />
 
     <TextView
-        android:id="@+id/sellPrice"
+        android:id="@+id/askPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/sample_sell"
-        app:layout_constraintStart_toEndOf="@+id/sellLabel"
-        app:layout_constraintTop_toBottomOf="@+id/buyLabel" />
+        app:layout_constraintStart_toEndOf="@+id/currentLabel"
+        app:layout_constraintTop_toTopOf="@+id/currentLabel" />
 
     <TextView
         android:id="@+id/buyAmount"
@@ -74,10 +72,53 @@
         android:id="@+id/amountLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/bought_amount"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toStartOf="@+id/buyAmount"
-        app:layout_constraintTop_toBottomOf="@+id/coinName" />
+        app:layout_constraintTop_toTopOf="@+id/buyLabel" />
+
+    <TextView
+        android:id="@+id/pnlPercent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="0%"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pnlLabel" />
+
+    <TextView
+        android:id="@+id/pnlLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Profit/loss(%):"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/pnlPercent"
+        app:layout_constraintTop_toBottomOf="@+id/pnlActualLabel" />
+
+    <TextView
+        android:id="@+id/pnlActual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="0%"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pnlActualLabel" />
+
+    <TextView
+        android:id="@+id/pnlActualLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Profit/loss($):"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toStartOf="@+id/pnlActual"
+        app:layout_constraintTop_toBottomOf="@+id/amountLabel" />
 </androidx.constraintlayout.widget.ConstraintLayout>

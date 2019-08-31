@@ -16,7 +16,7 @@ public interface TradeDao {
     @Insert
     void insertTrade(Trade trade);
     @Update
-    void updatePerson(Trade trade);
+    void updateTrade(Trade trade);
     @Delete
     void deleteTrade(Trade trade);
 
