@@ -108,8 +108,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id) {
 
-            case R.id.fragment_1:
-                navController.navigate(R.id.fragment_1);
+            case R.id.ActiveTradeFragment:
+                navController.navigate(R.id.ActiveTradeFragment);
                 break;
 
             case R.id.fragment_2:

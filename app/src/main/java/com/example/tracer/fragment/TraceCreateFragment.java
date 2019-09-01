@@ -13,7 +13,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.tracer.R;
 import com.example.tracer.utils.Keyboard;
 import com.example.tracer.viewModel.TradeViewModel;
-import com.example.tracer.utils.Keyboard.*;
 import com.google.android.material.textfield.TextInputEditText;
 import com.spark.submitbutton.SubmitButton;
 

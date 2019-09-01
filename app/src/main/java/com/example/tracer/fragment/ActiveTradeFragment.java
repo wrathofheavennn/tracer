@@ -73,8 +73,7 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
         View view = inflater.inflate(R.layout.fragment_layout_1, container, false);
         ButterKnife.bind(this, view);
         fab.setOnClickListener(view1 -> NavHostFragment.findNavController(Objects.requireNonNull(
-                getParentFragment())).navigate(ActiveTradeFragmentDirections.
-                actionFragment1ToTraceCreateFragment()));
+                getParentFragment())).navigate(ActiveTradeFragmentDirections.actionActiveTradeFragmentToTraceCreateFragment()));
 
         initRecycler();
 
