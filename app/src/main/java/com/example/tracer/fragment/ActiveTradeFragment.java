@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ import com.example.tracer.viewModel.TradeViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -56,6 +58,8 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
     RecyclerView rvTrades;
     @BindView(R.id.swipe_container)
     SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.lastRefreshDateTime)
+    TextView dateTimRefreshed;
     //rv
     private List<Trade> trades;
     private TradeListAdapter adapter;
@@ -213,6 +217,9 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
                             t.setProfitLossActual(percentage*t.getAmountBought());
                             t.setProfitLossPercent(percentage*100);
                         }
+                        //todo set labels
+                        dateTimRefreshed.setText(SimpleDateFormat.getDateTimeInstance()
+                                .format(System.currentTimeMillis()));
                         adapter.notifyDataSetChanged();
                         refreshLayout.setRefreshing(false);
                     }
