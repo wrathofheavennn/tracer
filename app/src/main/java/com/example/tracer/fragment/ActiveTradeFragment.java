@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -25,7 +23,6 @@ import com.example.tracer.R;
 import com.example.tracer.apiService.ApiService;
 import com.example.tracer.model.TickerV2;
 import com.example.tracer.model.Trade;
-import com.example.tracer.model.TradeDao;
 import com.example.tracer.network.RetroFitClientInstance;
 import com.example.tracer.recyclerView.SwipeToDeleteCallback;
 import com.example.tracer.recyclerView.TradeListAdapter;
@@ -111,7 +108,6 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
             public void run() {
                 refreshLayout.setRefreshing(true);
                 loadRecyclerViewData();
-                refreshLayout.setRefreshing(false);
             }
         });
         return view;
@@ -191,7 +187,6 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
     public void onRefresh() {
         refreshLayout.setRefreshing(true);
         loadRecyclerViewData();
-        refreshLayout.setRefreshing(false);
     }
     private void loadRecyclerViewData() {
         String symbol = "BTCUSD";
@@ -219,6 +214,7 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
                             t.setProfitLossPercent(percentage*100);
                         }
                         adapter.notifyDataSetChanged();
+                        refreshLayout.setRefreshing(false);
                     }
                     @Override
                     public void onError(Throwable e) {
