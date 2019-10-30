@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1092134493564",
+    "firebase_url": "https://tracer-f173f.firebaseio.com",
+    "project_id": "tracer-f173f",
+    "storage_bucket": "tracer-f173f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092134493564:android:d9a0d6848a4750de7998f9",
+        "android_client_info": {
+          "package_name": "com.example.tracer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1092134493564-2lsak4n9tk9atjocb15uvl2gqqsd3u17.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tracer",
+            "certificate_hash": "d9f3148c43e5aa56073e76b9e931e6b38c861127"
+          }
+        },
+        {
+          "client_id": "1092134493564-bi71rupog2jg0dc8g98ju2ujoelq5dtv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyZ_OQtVJ5YcxGcofs6O8fbaTGJ_bAGIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1092134493564-bi71rupog2jg0dc8g98ju2ujoelq5dtv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
