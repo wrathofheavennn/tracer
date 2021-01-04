@@ -52,6 +52,7 @@ public class TraceCreateFragment extends Fragment implements AdapterView.OnItemS
                 .get(TradeViewModel.class);
         View view = inflater.inflate(R.layout.fragment_create_trace, container, false);
         ButterKnife.bind(this, view);
+
         spin.setOnItemSelectedListener(this);
         // Spinner Drop down elements
         List<String> categories = new ArrayList<>();
@@ -66,6 +67,7 @@ public class TraceCreateFragment extends Fragment implements AdapterView.OnItemS
 
         // attaching data adapter to spinner
         spin.setAdapter(dataAdapter);
+
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

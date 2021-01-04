@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -66,6 +67,15 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     //swipe rv
     ConstraintLayout constraintLayout;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if( !((AppCompatActivity) getActivity()).getSupportActionBar().isShowing()) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
