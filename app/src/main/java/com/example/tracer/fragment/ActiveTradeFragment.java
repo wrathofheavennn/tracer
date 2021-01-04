@@ -111,7 +111,9 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
             @Override
             public void run() {
                 refreshLayout.setRefreshing(true);
-                loadRecyclerViewData();
+                loadBTCData();
+                loadBCHData();
+                loadETHData();
             }
         });
         return view;
@@ -190,9 +192,11 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
     @Override
     public void onRefresh() {
         refreshLayout.setRefreshing(true);
-        loadRecyclerViewData();
+        loadBTCData();
+        loadBCHData();
+        loadETHData();
     }
-    private void loadRecyclerViewData() {
+    private void loadBTCData() {
         String symbol = "BTCUSD";
         ApiService apiService = RetroFitClientInstance.getRetrofitInstance()
                 .create(ApiService.class);
@@ -211,7 +215,86 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
                         Timber.d("ivan ask: " + symbolData.getAsk());
                         Timber.d("ivan bid: " + symbolData.getBid());
                         for(Trade t : trades) {
+                            if (t.getCryptoName().equalsIgnoreCase("btc"))
                             t.setAskPrice(symbolData.getAsk());
+                            float diff = t.getAskPrice()-t.getBuyPrice();
+                            float percentage = diff/t.getBuyPrice();
+                            t.setProfitLossActual(percentage*t.getAmountBought());
+                            t.setProfitLossPercent(percentage*100);
+                        }
+                        //todo set labels
+                        dateTimRefreshed.setText(SimpleDateFormat.getDateTimeInstance()
+                                .format(System.currentTimeMillis()));
+                        adapter.notifyDataSetChanged();
+                        refreshLayout.setRefreshing(false);
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.d("ivan error: " + e.getMessage());
+                    }
+                });
+    }
+
+    private void loadBCHData() {
+        String symbol = "BCHUSD";
+        ApiService apiService = RetroFitClientInstance.getRetrofitInstance()
+                .create(ApiService.class);
+        // make a request by calling the corresponding method
+        Single<TickerV2> symbolData = apiService.getSymbolData(symbol);
+        symbolData.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<TickerV2>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(TickerV2 symbolData) {
+                        Timber.d("ivan ask: " + symbolData.getAsk());
+                        Timber.d("ivan bid: " + symbolData.getBid());
+                        for(Trade t : trades) {
+                            if (t.getCryptoName().equalsIgnoreCase("bch"))
+                                t.setAskPrice(symbolData.getAsk());
+                            float diff = t.getAskPrice()-t.getBuyPrice();
+                            float percentage = diff/t.getBuyPrice();
+                            t.setProfitLossActual(percentage*t.getAmountBought());
+                            t.setProfitLossPercent(percentage*100);
+                        }
+                        //todo set labels
+                        dateTimRefreshed.setText(SimpleDateFormat.getDateTimeInstance()
+                                .format(System.currentTimeMillis()));
+                        adapter.notifyDataSetChanged();
+                        refreshLayout.setRefreshing(false);
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.d("ivan error: " + e.getMessage());
+                    }
+                });
+    }
+
+    private void loadETHData() {
+        String symbol = "ETHUSD";
+        ApiService apiService = RetroFitClientInstance.getRetrofitInstance()
+                .create(ApiService.class);
+        // make a request by calling the corresponding method
+        Single<TickerV2> symbolData = apiService.getSymbolData(symbol);
+        symbolData.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<TickerV2>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(TickerV2 symbolData) {
+                        Timber.d("ivan ask: " + symbolData.getAsk());
+                        Timber.d("ivan bid: " + symbolData.getBid());
+                        for(Trade t : trades) {
+                            if (t.getCryptoName().equalsIgnoreCase("eth"))
+                                t.setAskPrice(symbolData.getAsk());
                             float diff = t.getAskPrice()-t.getBuyPrice();
                             float percentage = diff/t.getBuyPrice();
                             t.setProfitLossActual(percentage*t.getAmountBought());

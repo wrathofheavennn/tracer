@@ -24,12 +24,14 @@
                 android:id="@+id/lastRefreshLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/gray"
                 android:text="Last Refreshed: " />
 
             <TextView
                 android:id="@+id/lastRefreshDateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/gray"
                 android:text="14:28 12/12/1988" />
         </LinearLayout>
 

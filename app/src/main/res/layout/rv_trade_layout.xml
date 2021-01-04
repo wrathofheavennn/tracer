@@ -1,52 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/coinName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/sample_coinName"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="wrap_content"
+    android:background="@color/gray">
 
     <TextView
         android:id="@+id/buyLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/buy_price"
+        android:textColor="@color/white"
         android:textStyle="bold|italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coinName" />
+        app:layout_constraintStart_toEndOf="@+id/cryptoImage"
+        app:layout_constraintTop_toTopOf="@+id/cryptoImage" />
 
     <TextView
         android:id="@+id/buyPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/sample_buy"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/buyLabel"
-        app:layout_constraintTop_toBottomOf="@+id/coinName" />
+        app:layout_constraintTop_toTopOf="@+id/buyLabel" />
 
     <TextView
         android:id="@+id/currentLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/ask_price"
+        android:textColor="@color/white"
         android:textStyle="bold|italic"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/buyLabel"
         app:layout_constraintTop_toBottomOf="@+id/buyLabel" />
 
     <TextView
@@ -55,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/sample_sell"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/currentLabel"
         app:layout_constraintTop_toTopOf="@+id/currentLabel" />
 
@@ -62,21 +51,24 @@
         android:id="@+id/buyAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="@string/sample_amount"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coinName" />
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@+id/amountLabel"
+        app:layout_constraintTop_toTopOf="@+id/amountLabel" />
 
     <TextView
         android:id="@+id/amountLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/bought_amount"
+        android:textColor="@color/white"
         android:textStyle="bold|italic"
-        app:layout_constraintEnd_toStartOf="@+id/buyAmount"
-        app:layout_constraintTop_toTopOf="@+id/buyLabel" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/currentLabel"
+        app:layout_constraintTop_toBottomOf="@+id/currentLabel" />
 
     <TextView
         android:id="@+id/pnlPercent"
@@ -84,6 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="0%"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/pnlLabel" />
@@ -94,10 +87,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:text="Profit/loss(%):"
+        android:textColor="@color/white"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/pnlPercent"
         app:layout_constraintTop_toBottomOf="@+id/pnlActualLabel" />
 
@@ -107,6 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="0%"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/pnlActualLabel" />
@@ -115,10 +108,19 @@
         android:id="@+id/pnlActualLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="Profit/loss($):"
+        android:textColor="@color/white"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toStartOf="@+id/pnlActual"
-        app:layout_constraintTop_toBottomOf="@+id/amountLabel" />
+        app:layout_constraintTop_toTopOf="@+id/cryptoImage" />
+
+    <ImageView
+        android:id="@+id/cryptoImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_icons8_bitcoin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

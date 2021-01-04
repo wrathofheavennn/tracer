@@ -21,4 +21,10 @@
     <string name="sample_sell">10500</string>
     <string name="sample_amount">5000</string>
     <string name="sample_coinName">BTC</string>
+
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <string name="facebook_application_id" translatable="false">com.example.tracer</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fbcom.example.tracer</string>
+
+
 </resources>

@@ -17,11 +17,11 @@
     <fragment
         android:id="@+id/fragment_2"
         android:name="com.example.tracer.fragment.Fragment_2"
-        android:label="fragment_layout_2"
+        android:label="Fullscreen Display"
         tools:layout="@layout/fragment_layout_2" />
     <fragment
         android:id="@+id/traceCreateFragment"
         android:name="com.example.tracer.fragment.TraceCreateFragment"
-        android:label="fragment_create_trace"
+        android:label="Create new trace"
         tools:layout="@layout/fragment_create_trace" />
 </navigation>

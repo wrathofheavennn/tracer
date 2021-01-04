@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -26,8 +28,6 @@ public class TradeListAdapter extends
     public class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
-        @BindView(R.id.coinName)
-        TextView coinName;
         @BindView(R.id.buyAmount)
         TextView buyAmount;
         @BindView(R.id.buyPrice)
@@ -38,6 +38,8 @@ public class TradeListAdapter extends
         TextView pnlPercent;
         @BindView(R.id.pnlActual)
         TextView pnlActual;
+        @BindView(R.id.cryptoImage)
+        ImageView cryptoImage;
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
         public ViewHolder(View itemView) {
@@ -72,12 +74,22 @@ public class TradeListAdapter extends
         Trade trade = tradeList.get(position);
 
         // Set item views based on your views and data model
-        viewHolder.coinName.setText(trade.getCryptoName());
+        if (trade.getCryptoName().equalsIgnoreCase("btc")) {
+            viewHolder.cryptoImage.setImageResource(R.drawable.ic_icons8_bitcoin);
+        } else if (trade.getCryptoName().equalsIgnoreCase("bch")) {
+            viewHolder.cryptoImage.setImageResource(R.drawable.ic_icons8_bitcoingreen);
+        } else if (trade.getCryptoName().equalsIgnoreCase("eth")) {
+            viewHolder.cryptoImage.setImageResource(R.drawable.ic_icons8_ethereum);
+        }
+
+        String pnlPercentDouble = String.format("%.2f", trade.getProfitLossPercent());
+        String pnlActualDouble = String.format("%.2f", trade.getProfitLossActual());
+
         viewHolder.buyAmount.setText(Float.toString(trade.getAmountBought()));
         viewHolder.buyPrice.setText(Float.toString(trade.getBuyPrice()));
         viewHolder.askPrice.setText(Float.toString(trade.getAskPrice()));
-        viewHolder.pnlPercent.setText(Float.toString(trade.getProfitLossPercent()));
-        viewHolder.pnlActual.setText(Float.toString(trade.getProfitLossActual()));
+        viewHolder.pnlPercent.setText(pnlPercentDouble);
+        viewHolder.pnlActual.setText(pnlActualDouble);
         float x = trade.getProfitLossPercent();
         Context context = viewHolder.pnlActual.getContext();
         if (x>0) {
