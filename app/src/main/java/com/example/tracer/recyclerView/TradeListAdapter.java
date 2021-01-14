@@ -40,6 +40,9 @@ public class TradeListAdapter extends
         TextView pnlActual;
         @BindView(R.id.cryptoImage)
         ImageView cryptoImage;
+        @BindView(R.id.buyAmountSize)
+        TextView buyAmountSize;
+
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
         public ViewHolder(View itemView) {
@@ -82,15 +85,22 @@ public class TradeListAdapter extends
             viewHolder.cryptoImage.setImageResource(R.drawable.ic_icons8_ethereum);
         }
 
+        //truncate to 2 decimals
         String pnlPercentDouble = String.format("%.2f", trade.getProfitLossPercent());
         String pnlActualDouble = String.format("%.2f", trade.getProfitLossActual());
+        String askPriceText = String.format("%.2f", trade.getAskPrice());
+        String buyPriceText = String.format("%.2f", trade.getBuyPrice());
+        String buyAmountText = String.format("%.2f", trade.getAmountBought());
+        double size = trade.getAmountBought() / trade.getBuyPrice();
+        String buyAmountSizeText = String.format("%.9f", size);
 
-        viewHolder.buyAmount.setText(Float.toString(trade.getAmountBought()));
-        viewHolder.buyPrice.setText(Float.toString(trade.getBuyPrice()));
-        viewHolder.askPrice.setText(Float.toString(trade.getAskPrice()));
+        viewHolder.buyAmount.setText(buyAmountText);
+        viewHolder.buyPrice.setText(buyPriceText);
+        viewHolder.askPrice.setText(askPriceText);
         viewHolder.pnlPercent.setText(pnlPercentDouble);
         viewHolder.pnlActual.setText(pnlActualDouble);
-        float x = trade.getProfitLossPercent();
+        viewHolder.buyAmountSize.setText(buyAmountSizeText);
+        double x = trade.getProfitLossPercent();
         Context context = viewHolder.pnlActual.getContext();
         if (x>0) {
             viewHolder.pnlPercent.setTextColor(ContextCompat.getColor(context,R.color.colorGreen));

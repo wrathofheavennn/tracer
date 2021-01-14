@@ -2,6 +2,7 @@ package com.example.tracer.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,9 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
     //swipe rv
     ConstraintLayout constraintLayout;
 
+    //periodic refresh
+    Handler handler;
+
     @Override
     public void onResume() {
         super.onResume();
@@ -81,7 +85,7 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //returning our layout file
         //change R.layout.yourlayoutfilename for each of your fragments
-        View view = inflater.inflate(R.layout.fragment_layout_1, container, false);
+        View view = inflater.inflate(R.layout.fragment_active_trace_layout, container, false);
         ButterKnife.bind(this, view);
         fab.setOnClickListener(view1 -> NavHostFragment.findNavController(Objects.requireNonNull(
                 getParentFragment())).navigate(ActiveTradeFragmentDirections.actionActiveTradeFragmentToTraceCreateFragment()));
@@ -107,17 +111,17 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
 
         //swipe down to refresh
         // SwipeRefreshLayout
-        refreshLayout.setOnRefreshListener(this);
+        /*refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_dark,
                 android.R.color.holo_orange_dark,
-                android.R.color.holo_blue_dark);
+                android.R.color.holo_blue_dark);*/
 
         /**
          * Showing Swipe Refresh animation on activity create
          * As animation won't start on onCreate, post runnable is used
          */
-        refreshLayout.post(new Runnable() {
+        /*refreshLayout.post(new Runnable() {
             @Override
             public void run() {
                 refreshLayout.setRefreshing(true);
@@ -125,9 +129,28 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
                 loadBCHData();
                 loadETHData();
             }
-        });
+        });*/
+
+        // Create the Handler object (on the main thread by default)
+        handler = new Handler();
+        // Start the initial runnable task by posting through the handler
+        handler.post(runnableCode);
         return view;
     }
+
+    // periodic refresh
+    private Runnable runnableCode = new Runnable() {
+        @Override
+        public void run() {
+            // Do something here on the main thread
+            loadBTCData();
+            loadBCHData();
+            loadETHData();
+            // Repeat this the same runnable code block again another 2 seconds
+            // 'this' is referencing the Runnable object
+            handler.postDelayed(this, 5000);
+        }
+    };
 
     private void enableSwipeToDeleteAndUndo(TradeViewModel tradeViewModel) {
         SwipeToDeleteCallback swipeToDeleteCallback = new SwipeToDeleteCallback(getContext()) {
@@ -227,8 +250,8 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
                         for(Trade t : trades) {
                             if (t.getCryptoName().equalsIgnoreCase("btc"))
                             t.setAskPrice(symbolData.getAsk());
-                            float diff = t.getAskPrice()-t.getBuyPrice();
-                            float percentage = diff/t.getBuyPrice();
+                            double diff = t.getAskPrice()-t.getBuyPrice();
+                            double percentage = diff/t.getBuyPrice();
                             t.setProfitLossActual(percentage*t.getAmountBought());
                             t.setProfitLossPercent(percentage*100);
                         }
@@ -266,8 +289,8 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
                         for(Trade t : trades) {
                             if (t.getCryptoName().equalsIgnoreCase("bch"))
                                 t.setAskPrice(symbolData.getAsk());
-                            float diff = t.getAskPrice()-t.getBuyPrice();
-                            float percentage = diff/t.getBuyPrice();
+                            double diff = t.getAskPrice()-t.getBuyPrice();
+                            double percentage = diff/t.getBuyPrice();
                             t.setProfitLossActual(percentage*t.getAmountBought());
                             t.setProfitLossPercent(percentage*100);
                         }
@@ -305,8 +328,8 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
                         for(Trade t : trades) {
                             if (t.getCryptoName().equalsIgnoreCase("eth"))
                                 t.setAskPrice(symbolData.getAsk());
-                            float diff = t.getAskPrice()-t.getBuyPrice();
-                            float percentage = diff/t.getBuyPrice();
+                            double diff = t.getAskPrice()-t.getBuyPrice();
+                            double percentage = diff/t.getBuyPrice();
                             t.setProfitLossActual(percentage*t.getAmountBought());
                             t.setProfitLossPercent(percentage*100);
                         }

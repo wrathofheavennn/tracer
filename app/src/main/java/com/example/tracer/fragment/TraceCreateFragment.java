@@ -1,5 +1,6 @@
 package com.example.tracer.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.fragment.NavHostFragment;
@@ -17,6 +19,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.tracer.R;
 import com.example.tracer.utils.Keyboard;
 import com.example.tracer.viewModel.TradeViewModel;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.spark.submitbutton.SubmitButton;
 
@@ -26,6 +29,7 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 /**
  * Created by Juned on 11/19/2017.
@@ -73,10 +77,14 @@ public class TraceCreateFragment extends Fragment implements AdapterView.OnItemS
             public void onClick(View view) {
                 if (isValid() && !cryptoSelected.equals("")) {
                     Keyboard.closeKeyboard(view, getContext());
-                    tradeViewModel.addTrade(cryptoSelected, Long.parseLong(priceInput.getText()
-                            .toString()), 0, Long.parseLong(amountInput.getText().toString()));
+                    tradeViewModel.addTrade(cryptoSelected, Double.parseDouble(priceInput.getText()
+                            .toString()), 0, Double.parseDouble(amountInput.getText().toString()));
                     NavHostFragment.findNavController(Objects.requireNonNull(
                             getParentFragment())).popBackStack();
+                } else {
+                    Snackbar sb = Snackbar.make(view, "Please input correct prices!", Snackbar.LENGTH_LONG);
+                    sb.setActionTextColor(ContextCompat.getColor(getContext(), R.color.colorRed));
+                    sb.show();
                 }
             }
         });
@@ -84,7 +92,17 @@ public class TraceCreateFragment extends Fragment implements AdapterView.OnItemS
     }
 
     private boolean isValid() {
-        return true;
+        Boolean isValid = false;
+        Double priceCheck;
+        Double amountCheck;
+        try {
+            priceCheck = Double.parseDouble(priceInput.getText().toString());
+            amountCheck = Double.parseDouble(amountInput.getText().toString());
+            isValid = true;
+        } catch (Exception e) {
+            Timber.e(e);
+        }
+        return isValid;
     }
 
 

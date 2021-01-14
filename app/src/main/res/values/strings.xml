@@ -16,7 +16,7 @@
     <string name="buy_price">Buy Price:</string>
     <string name="sell_price">Sell Price:</string>
     <string name="ask_price">Ask Price:</string>
-    <string name="bought_amount">Bought Amount:</string>
+    <string name="bought_amount">Size(USD):</string>
     <string name="sample_buy">9700</string>
     <string name="sample_sell">10500</string>
     <string name="sample_amount">5000</string>

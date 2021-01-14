@@ -19,10 +19,8 @@ import androidx.fragment.app.Fragment;
 import com.example.tracer.R;
 import com.example.tracer.apiService.ApiService;
 import com.example.tracer.model.TickerV2;
-import com.example.tracer.model.Trade;
 import com.example.tracer.network.RetroFitClientInstance;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +54,7 @@ public class FullScreenDisplay extends Fragment implements AdapterView.OnItemSel
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_layout_2, container, false);
+        View view = inflater.inflate(R.layout.fragment_big_screen_layout, container, false);
         ButterKnife.bind(this, view);
         loadFullScreenData();
 
