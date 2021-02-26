@@ -75,8 +75,8 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
     @Override
     public void onResume() {
         super.onResume();
-        if( !((AppCompatActivity) getActivity()).getSupportActionBar().isShowing()) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+        if( !Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).isShowing()) {
+            Objects.requireNonNull(((AppCompatActivity) getActivity()).getSupportActionBar()).show();
         }
     }
 
@@ -94,12 +94,10 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
 
         //swipe to delete
         constraintLayout = view.findViewById(R.id.constraintLayout);
-
-
         TradeViewModel tradeViewModel = ViewModelProviders.of(this)
                 .get(TradeViewModel.class);
         enableSwipeToDeleteAndUndo(tradeViewModel);
-        tradeViewModel.getTradeListLiveData().observe(this, new Observer<List<Trade>>() {
+        tradeViewModel.getTradeListLiveData().observe(getViewLifecycleOwner(), new Observer<List<Trade>>() {
             @Override
             public void onChanged(@Nullable List<Trade> tradeList) {
                 trades.clear();
@@ -131,7 +129,7 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
             }
         });*/
 
-        // Create the Handler object (on the main thread by default)
+        // Create the Handler  object (on the main thread by default)
         handler = new Handler();
         // Start the initial runnable task by posting through the handler
         handler.post(runnableCode);
@@ -143,9 +141,9 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
         @Override
         public void run() {
             // Do something here on the main thread
-            loadBTCData();
-            loadBCHData();
-            loadETHData();
+            loadBTCData("Gemini");
+            loadBCHData("Gemini");
+            loadETHData("Gemini");
             // Repeat this the same runnable code block again another 2 seconds
             // 'this' is referencing the Runnable object
             handler.postDelayed(this, 5000);
@@ -225,13 +223,13 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
     @Override
     public void onRefresh() {
         refreshLayout.setRefreshing(true);
-        loadBTCData();
-        loadBCHData();
-        loadETHData();
+        loadBTCData("Gemini");
+        loadBCHData("Gemini");
+        loadETHData("Gemini");
     }
-    private void loadBTCData() {
+    private void loadBTCData(String exchange) {
         String symbol = "BTCUSD";
-        ApiService apiService = RetroFitClientInstance.getRetrofitInstance()
+        ApiService apiService = RetroFitClientInstance.getRetrofitInstance(exchange)
                 .create(ApiService.class);
         // make a request by calling the corresponding method
         Single<TickerV2> symbolData = apiService.getSymbolData(symbol);
@@ -268,9 +266,9 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
                 });
     }
 
-    private void loadBCHData() {
+    private void loadBCHData(String exchange) {
         String symbol = "BCHUSD";
-        ApiService apiService = RetroFitClientInstance.getRetrofitInstance()
+        ApiService apiService = RetroFitClientInstance.getRetrofitInstance(exchange)
                 .create(ApiService.class);
         // make a request by calling the corresponding method
         Single<TickerV2> symbolData = apiService.getSymbolData(symbol);
@@ -307,9 +305,9 @@ public class ActiveTradeFragment extends Fragment implements SwipeRefreshLayout.
                 });
     }
 
-    private void loadETHData() {
+    private void loadETHData(String exchange) {
         String symbol = "ETHUSD";
-        ApiService apiService = RetroFitClientInstance.getRetrofitInstance()
+        ApiService apiService = RetroFitClientInstance.getRetrofitInstance(exchange)
                 .create(ApiService.class);
         // make a request by calling the corresponding method
         Single<TickerV2> symbolData = apiService.getSymbolData(symbol);
